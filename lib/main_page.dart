@@ -31,9 +31,11 @@ class _MainPageState extends State<MainPage> {
                   labelText: "Name",
                   border: OutlineInputBorder(),
                 ),
+                onChanged: (value) {
+                  _userName = value;
+                },
                 validator: (value) {
                   if (value!.length < 4) {
-                    _userName = value;
                     return "Must be at least 4 characters.";
                   } else {
                     return null;
@@ -51,14 +53,15 @@ class _MainPageState extends State<MainPage> {
                   labelText: "E-Mail",
                   border: OutlineInputBorder(),
                 ),
+                onChanged: (value) {
+                  _eMail = value;
+                },
                 validator: (value) {
                   if (!EmailValidator.validate(value!)) {
-                    _eMail = value;
                     return "This is not an email.";
                   } else {
                     return null;
                   }
-                  
                 },
               ),
               ElevatedButton(
@@ -66,14 +69,11 @@ class _MainPageState extends State<MainPage> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       print("the form is valid");
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        
-                        SnackBar(
-                          backgroundColor: Colors.teal,
-                          content: Text(
-                          "User Name: $_userName \n E-Mail: $_eMail"
-                        ),)
-                      );
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: Colors.teal,
+                        content:
+                            Text("User Name: $_userName \n E-Mail: $_eMail"),
+                      ));
                     }
 
                     // print("object");
